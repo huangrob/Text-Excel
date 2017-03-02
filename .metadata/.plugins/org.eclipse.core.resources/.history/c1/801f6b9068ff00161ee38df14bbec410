@@ -1,13 +1,10 @@
 package textExcel;
 
-public class TextCell implements Cell{
-	
+public class EmptyCell implements Cell{
 	public String abbreviatedCellText(){
-		return null;
+		return abbreviatedCellText();
 	}
-	
 	public String fullCellText(){
-		return null;
+		return fullCellText();
 	}
-
 }

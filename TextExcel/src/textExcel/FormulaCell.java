@@ -1,5 +1,5 @@
 package textExcel;
 
-public class FormulaCell extends RealCell implements Cell {
+public class FormulaCell extends RealCell {
 
 }
