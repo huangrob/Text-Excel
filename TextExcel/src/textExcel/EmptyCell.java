@@ -3,10 +3,12 @@ package textExcel;
 public class EmptyCell implements Cell{
 	
 	public String abbreviatedCellText(){
-		return null;
+		String abbreviatedCellText = null;
+		return abbreviatedCellText;
 	}
 	
 	public String fullCellText(){
-		return null;
+		String fullCellText = null;
+		return fullCellText;
 	}
 }
