@@ -2,8 +2,10 @@ package textExcel;
 
 // Update this file with your own code.
 
-public class Spreadsheet implements Grid
-{
+public class Spreadsheet implements Grid{
+	
+	int rowNum;
+	int colNum;
 	
 	public Spreadsheet(){
 		EmptyCell[][] spreadsheet = new EmptyCell[12][20];
@@ -19,8 +21,7 @@ public class Spreadsheet implements Grid
 	@Override
 	public int getRows()
 	{
-		// TODO Auto-generated method stub
-		return 0;
+		return SpreadsheetLocation.getRow();
 	}
 
 	@Override
