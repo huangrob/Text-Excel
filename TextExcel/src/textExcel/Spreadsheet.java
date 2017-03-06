@@ -4,31 +4,35 @@ package textExcel;
 
 public class Spreadsheet implements Grid{
 	
-	int rowNum;
-	int colNum;
+	private Cell[][] spreadsheet = new EmptyCell[12][20];
 	
 	public Spreadsheet(){
-		EmptyCell[][] spreadsheet = new EmptyCell[12][20];
+		for(int i = 0; i < spreadsheet.length; i++){
+			for (int j = 0; j < spreadsheet[i].length; j++){
+				spreadsheet[i][j] = new EmptyCell();
+			}
+		}
+		
 	}
 
 	@Override
 	public String processCommand(String command)
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return command;
 	}
 
 	@Override
 	public int getRows()
 	{
-		return SpreadsheetLocation.getRow();
+		return 20;
 	}
 
 	@Override
 	public int getCols()
 	{
 		// TODO Auto-generated method stub
-		return 0;
+		return 12;
 	}
 
 	@Override
@@ -41,8 +45,9 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
+		String gridText = "";
 		// TODO Auto-generated method stub
-		return null;
+		return gridText;
 	}
 
 }

@@ -1,0 +1,30 @@
+package textExcel;
+
+//Update this file with your own code.
+
+public class SpreadsheetLocation implements Location{
+	
+	private String cellName = "";
+	private int rowNum;
+	private int colNum;
+	
+	public SpreadsheetLocation(String cellName)
+    {
+		cellName = this.cellName;
+    }
+	
+    @Override
+    public int getRow()
+    {
+    	int rowNum = Integer.parseInt(cellName.substring(1)) - 1;
+        return this.rowNum;
+    }
+
+    @Override
+    public int getCol()
+    {
+    	int column = (int) (cellName.charAt(0) - 65);
+    	return this.colNum;
+    }
+
+}
