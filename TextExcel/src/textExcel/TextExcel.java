@@ -11,11 +11,11 @@ public class TextExcel
 	public static void main(String[] args)
 	{
 	    Spreadsheet spreadsheet = new Spreadsheet();
-	    Scanner input = new Scanner(System.in);
-	    String command = input.next();
+	    Scanner scannerInput = new Scanner(System.in);
+	    String command = scannerInput.next();
 	    while(!(command.equals("quit"))){
 	    	System.out.println(spreadsheet.processCommand(command));
-	    	command = input.next();
+	    	command = scannerInput.next();
 	    }
 	}
 }
