@@ -19,7 +19,9 @@ public class Spreadsheet implements Grid{
 	public String processCommand(String command)
 	{
 		if (command.length() <= 3) {
-			getRow()
+	    	int rowNum = Integer.parseInt(command.substring(1)) - 1;
+	    	int colNum = (int) (command.charAt(0) - 65);
+	    	return spreadsheet[colNum][rowNum];
 		}
 		return command;
 	}
@@ -46,6 +48,21 @@ public class Spreadsheet implements Grid{
 	public String getGridText()
 	{
 		String gridText = "";
+		System.out.print("  ");
+		for (char c = 'A'; c <= 'L'; c++){
+			System.out.print("|" + c + "         ");
+		}
+		System.out.println("|");
+		for (int i = 1; i <= 20; i++){
+			System.out.print(i);
+			if (i < 10){
+				System.out.print(" ");
+			}
+			for (char a = 'A'; a <= 'L'; a++){
+				System.out.print("|" + spreadsheet[(int)a - 65][i-1].abbreviatedCellText());
+			}
+		System.out.println("|");
+		}
 		return gridText;
 	}
 
