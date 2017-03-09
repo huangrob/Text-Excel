@@ -1,5 +1,7 @@
 package textExcel;
 
+import java.util.Arrays;
+
 // Update this file with your own code.
 
 public class Spreadsheet implements Grid{
@@ -21,9 +23,12 @@ public class Spreadsheet implements Grid{
 		if (command.length() <= 3) {
 	    	int rowNum = Integer.parseInt(command.substring(1)) - 1;
 	    	int colNum = (int) (command.charAt(0) - 65);
-	    	return spreadsheet[colNum][rowNum];
+	    	return (spreadsheet[colNum][rowNum].abbreviatedCellText());
+	    	}
+		if (command.contains("=")){
+			
 		}
-		return command;
+		return "";
 	}
 
 	@Override
@@ -47,7 +52,6 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
-		String gridText = "";
 		System.out.print("  ");
 		for (char c = 'A'; c <= 'L'; c++){
 			System.out.print("|" + c + "         ");
@@ -63,7 +67,7 @@ public class Spreadsheet implements Grid{
 			}
 		System.out.println("|");
 		}
-		return gridText;
+		return "";
 	}
 
 }
