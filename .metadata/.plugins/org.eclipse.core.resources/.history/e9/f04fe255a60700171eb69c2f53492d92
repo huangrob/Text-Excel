@@ -1,0 +1,20 @@
+package textExcel;
+
+public class EmptyCell implements Cell{
+	
+	public String abbreviatedCellText(){
+		return "          ";
+	}
+	
+	public String fullCellText(String strAssignment){
+		if (strAssignment.length() >= 10){
+			return abbreviatedCellText();
+		}
+		else {
+			for (int i = 0; i < 10 - strAssignment.length(); i++){
+				strAssignment = strAssignment + " ";
+			}
+			return strAssignment;
+		}
+	}
+}
