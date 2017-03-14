@@ -21,7 +21,7 @@ public class SpreadsheetLocation implements Location{
     @Override
     public int getCol()
     {
-    	int colNum = (int) (coordinates.charAt(0) - 65);
+    	int colNum = (int) (coordinates.charAt(0) - 'A');
     	return colNum;
     }
 

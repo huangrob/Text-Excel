@@ -20,11 +20,13 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-		String[] commandParts = command.split(" ");
-		String coordinates = commandParts[0];
-		SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
-		int colNum = cellCoordinates.getCol();
-		int rowNum = cellCoordinates.getRow();
+		if (command.contains(" ")){	
+			String[] commandParts = command.split(" ");
+			String coordinates = commandParts[0];
+			SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
+			int colNum = cellCoordinates.getCol();
+			int rowNum = cellCoordinates.getRow();
+		}
 		if (command.length() <= 3) {
 	    	return (spreadsheet[colNum][rowNum].fullCellText());
 	    	}
@@ -34,6 +36,7 @@ public class Spreadsheet implements Grid{
 		}
 		if (commandParts[0].equals("clear")){
 			spreadsheet[colNum][rowNum] = new EmptyCell();
+			return getGridText();
 		}
 		else if (command.equals("clear")){
 			Spreadsheet clearSpreadsheet = new Spreadsheet();
@@ -74,7 +77,7 @@ public class Spreadsheet implements Grid{
 				System.out.print(" ");
 			}
 			for (char a = 'A'; a <= 'L'; a++){
-				System.out.print("|" + spreadsheet[(int)a - 65][i-1].abbreviatedCellText());
+				System.out.print("|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText());
 			}
 		System.out.println("|");
 		}
