@@ -10,12 +10,13 @@ public class TextExcel
 
 	public static void main(String[] args)
 	{
-	    Spreadsheet spreadsheet = new Spreadsheet();
-	    Scanner input = new Scanner(System.in);
-	    String command = input.next();
+		Spreadsheet spreadsheet = new Spreadsheet();
+	    Scanner scannerInput = new Scanner(System.in);
+	    String command = scannerInput.next();
+	    spreadsheet.getGridText();
 	    while(!(command.equals("quit"))){
 	    	System.out.println(spreadsheet.processCommand(command));
-	    	command = input.next();
+	    	command = scannerInput.next();
 	    }
 	}
 }
