@@ -1,10 +1,12 @@
 package textExcel;
 
+import java.util.Arrays;
+
 // Update this file with your own code.
 
 public class Spreadsheet implements Grid{
 	
-	private Cell[][] spreadsheet = new EmptyCell[12][20];
+	private Cell[][] spreadsheet = new Cell[12][20];
 	
 	public Spreadsheet(){
 		for(int i = 0; i < spreadsheet.length; i++){
@@ -18,12 +20,29 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-		if (command.length() <= 3) {
-	    	int rowNum = Integer.parseInt(command.substring(1)) - 1;
-	    	int colNum = (int) (command.charAt(0) - 65);
-	    	return null;
+		if (command.contains(" ")){	
+			String[] commandParts = command.split(" ");
+			String coordinates = commandParts[0];
+			SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
+			int colNum = cellCoordinates.getCol();
+			int rowNum = cellCoordinates.getRow();
 		}
-		return command;
+		if (command.length() <= 3) {
+	    	return (spreadsheet[colNum][rowNum].fullCellText());
+	    	}
+		if (command.contains("=")){
+			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
+	    	return getGridText();
+		}
+		if (commandParts[0].equals("clear")){
+			spreadsheet[colNum][rowNum] = new EmptyCell();
+			return getGridText();
+		}
+		else if (command.equals("clear")){
+			Spreadsheet clearSpreadsheet = new Spreadsheet();
+			return clearSpreadsheet.getGridText();
+		}
+		return "";
 	}
 
 	@Override
@@ -47,7 +66,6 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
-		String gridText = "";
 		System.out.print("  ");
 		for (char c = 'A'; c <= 'L'; c++){
 			System.out.print("|" + c + "         ");
@@ -59,11 +77,11 @@ public class Spreadsheet implements Grid{
 				System.out.print(" ");
 			}
 			for (char a = 'A'; a <= 'L'; a++){
-				System.out.print("|" + spreadsheet[a][i-2].abbreviatedCellText());
+				System.out.print("|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText());
 			}
 		System.out.println("|");
 		}
-		return gridText;
+		return "";
 	}
 
 }

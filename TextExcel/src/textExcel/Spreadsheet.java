@@ -20,28 +20,27 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-		if (command.contains(" ")){	
-			String[] commandParts = command.split(" ");
-			String coordinates = commandParts[0];
-			SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
-			int colNum = cellCoordinates.getCol();
-			int rowNum = cellCoordinates.getRow();
+		if (command.equals("clear")){
+			Spreadsheet clearSpreadsheet = new Spreadsheet();
+			return clearSpreadsheet.getGridText();
 		}
-		if (command.length() <= 3) {
-	    	return (spreadsheet[colNum][rowNum].fullCellText());
-	    	}
-		if (command.contains("=")){
-			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
-	    	return getGridText();
-		}
+		String[] commandParts = command.split(" ");
+		String coordinates = commandParts[0];
+		SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
+		int colNum = cellCoordinates.getCol();
+		int rowNum = cellCoordinates.getRow();
 		if (commandParts[0].equals("clear")){
 			spreadsheet[colNum][rowNum] = new EmptyCell();
 			return getGridText();
 		}
-		else if (command.equals("clear")){
-			Spreadsheet clearSpreadsheet = new Spreadsheet();
-			return clearSpreadsheet.getGridText();
+		else if (command.length() <= 3) {
+	    	return (spreadsheet[colNum][rowNum].fullCellText());
+	    	}
+		else if (command.contains("=")){
+			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
+	    	return getGridText();
 		}
+		
 		return "";
 	}
 
