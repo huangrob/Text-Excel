@@ -4,7 +4,7 @@ package textExcel;
 
 public class SpreadsheetLocation implements Location{
 	
-	private String coordinates = "";
+	private String coordinates;
 	
 	public SpreadsheetLocation(String cellName)
     {
@@ -14,8 +14,8 @@ public class SpreadsheetLocation implements Location{
     @Override
     public int getRow()
     {
-    	int rowNum = (Integer.parseInt(coordinates.substring(1))) - 1;
-        return rowNum;
+    	int rowNum = Integer.parseInt(coordinates.substring(1));
+        return rowNum - 1;
     }
 
     @Override

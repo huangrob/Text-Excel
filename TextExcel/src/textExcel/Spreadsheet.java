@@ -20,27 +20,30 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
+		if (command.equals("")) {
+			return "";
+		}
 		if (command.equals("clear")){
 			Spreadsheet clearSpreadsheet = new Spreadsheet();
 			return clearSpreadsheet.getGridText();
 		}
-		String[] commandParts = command.split(" ");
-		String coordinates = commandParts[0];
-		SpreadsheetLocation cellCoordinates = new SpreadsheetLocation(coordinates);
-		int colNum = cellCoordinates.getCol();
-		int rowNum = cellCoordinates.getRow();
-		if (commandParts[0].equals("clear")){
-			spreadsheet[colNum][rowNum] = new EmptyCell();
-			return getGridText();
+		else {
+			String[] commandParts = command.split(" ");
+			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+			int colNum = coordinates.getCol();
+			int rowNum = coordinates.getRow();
+			if (commandParts[0].equals("clear")){
+				spreadsheet[colNum][rowNum] = new EmptyCell();
+				return getGridText();
+			}		
+			else if (command.length() <= 3) {
+				return (spreadsheet[colNum][rowNum].fullCellText());
+	    		}
+			else if (commandParts[1].equals("=")){
+				spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
+				return getGridText();
+			}
 		}
-		else if (command.length() <= 3) {
-	    	return (spreadsheet[colNum][rowNum].fullCellText());
-	    	}
-		else if (command.contains("=")){
-			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
-	    	return getGridText();
-		}
-		
 		return "";
 	}
 
@@ -59,28 +62,28 @@ public class Spreadsheet implements Grid{
 	@Override
 	public Cell getCell(Location loc)
 	{
-		return null;
+		return spreadsheet[loc.getRow()][loc.getCol()];
 	}
 
 	@Override
 	public String getGridText()
 	{
-		System.out.print("  ");
+		String grid = "  ";
 		for (char c = 'A'; c <= 'L'; c++){
-			System.out.print("|" + c + "         ");
+			grid += "|" + c + "         ";
 		}
-		System.out.println("|");
+		grid += "|\n";
 		for (int i = 1; i <= 20; i++){
-			System.out.print(i);
+			grid += i;
 			if (i < 10){
-				System.out.print(" ");
+				grid += " ";
 			}
 			for (char a = 'A'; a <= 'L'; a++){
-				System.out.print("|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText());
+				grid += "|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText();
 			}
-		System.out.println("|");
+		grid += "|\n";
 		}
-		return "";
+		return grid;
 	}
 
 }
