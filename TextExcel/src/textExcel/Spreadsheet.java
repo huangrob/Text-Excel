@@ -20,36 +20,39 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-			String[] commandParts = command.split(" ");
-			if (commandParts.length == 1) {
-				if (command.length() <= 3) {
-					SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
-					int colNum = coordinates.getCol();
-					int rowNum = coordinates.getRow();
-					return spreadsheet[colNum][rowNum].fullCellText();
-				}
-				else {
-					Spreadsheet clearSpreadsheet = new Spreadsheet();
-					return clearSpreadsheet.getGridText();
-				}
-			}
-			else if (commandParts.length == 2) {
-				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1]);
-				int colNum = coordinates.getCol();
-				int rowNum = coordinates.getRow();
-				spreadsheet[colNum][rowNum] = new EmptyCell();
-				return getGridText();
-			}
-			else if (commandParts.length == 3) {
+		String[] commandParts = command.split(" ");
+		System.out.println(commandParts.length);
+		if (commandParts.length == 3) {
+			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+			int colNum = coordinates.getCol();
+			int rowNum = coordinates.getRow();
+			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
+			return getGridText();
+		}
+		else if (commandParts.length == 1) {
+			if (command.length() <= 3) {
 				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
 				int colNum = coordinates.getCol();
 				int rowNum = coordinates.getRow();
-				spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
-				return getGridText();
+				return spreadsheet[colNum][rowNum].fullCellText();
 			}
-			return null;
+			else {
+				Spreadsheet clearSpreadsheet = new Spreadsheet();
+				return clearSpreadsheet.getGridText();
+			}
+		}
+		else if (commandParts.length == 2) {
+			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1]);
+			int colNum = coordinates.getCol();
+			int rowNum = coordinates.getRow();
+			spreadsheet[colNum][rowNum] = new EmptyCell();
+			return getGridText();
+		}
+		else {
+			return "";
+		}
 	}
-
+		
 	@Override
 	public int getRows()
 	{
@@ -71,7 +74,7 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
-		String grid = "  ";
+		String grid = "   ";
 		for (char c = 'A'; c <= 'L'; c++){
 			grid += "|" + c + "         ";
 		}
@@ -80,6 +83,9 @@ public class Spreadsheet implements Grid{
 			grid += i;
 			if (i < 10){
 				grid += "  ";
+			}
+			else {
+				grid += " ";
 			}
 			for (char a = 'A'; a <= 'L'; a++){
 				grid += "|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText();

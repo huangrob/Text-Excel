@@ -7,7 +7,7 @@ public class EmptyCell implements Cell{
 	}
 	
 	public String fullCellText(){
-		return null;
+		return "";
 	}
 	
 	public String getType(){
