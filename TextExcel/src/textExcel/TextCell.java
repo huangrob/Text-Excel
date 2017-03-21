@@ -10,7 +10,7 @@ public class TextCell implements Cell{
 	
 	public String abbreviatedCellText(){
 		if (text.length() <= 10){
-			for (int i = 10; i > text.length(); i--){
+			for (int i = 10; i >= text.length(); i--){
 				text += " ";
 			}
 			return text;
@@ -26,6 +26,10 @@ public class TextCell implements Cell{
 	
 	public String fullCellText(){
 		return text;
+	}
+	
+	public String getType(){
+		return "TextCell";
 	}
 
 }

@@ -20,31 +20,34 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
-		if (command.equals("")) {
-			return "";
-		}
-		if (command.equals("clear")){
-			Spreadsheet clearSpreadsheet = new Spreadsheet();
-			return clearSpreadsheet.getGridText();
-		}
-		else {
 			String[] commandParts = command.split(" ");
-			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
-			int colNum = coordinates.getCol();
-			int rowNum = coordinates.getRow();
-			if (commandParts[0].equals("clear")){
+			if (commandParts.length == 1) {
+				if (command.length() <= 3) {
+					SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+					int colNum = coordinates.getCol();
+					int rowNum = coordinates.getRow();
+					return spreadsheet[colNum][rowNum].fullCellText();
+				}
+				else {
+					Spreadsheet clearSpreadsheet = new Spreadsheet();
+					return clearSpreadsheet.getGridText();
+				}
+			}
+			else if (commandParts.length == 2) {
+				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1]);
+				int colNum = coordinates.getCol();
+				int rowNum = coordinates.getRow();
 				spreadsheet[colNum][rowNum] = new EmptyCell();
 				return getGridText();
-			}		
-			else if (command.length() <= 3) {
-				return (spreadsheet[colNum][rowNum].fullCellText());
-	    		}
-			else if (commandParts[1].equals("=")){
+			}
+			else if (commandParts.length == 3) {
+				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+				int colNum = coordinates.getCol();
+				int rowNum = coordinates.getRow();
 				spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
 				return getGridText();
 			}
-		}
-		return "";
+			return null;
 	}
 
 	@Override
@@ -76,7 +79,7 @@ public class Spreadsheet implements Grid{
 		for (int i = 1; i <= 20; i++){
 			grid += i;
 			if (i < 10){
-				grid += " ";
+				grid += "  ";
 			}
 			for (char a = 'A'; a <= 'L'; a++){
 				grid += "|" + spreadsheet[(int)a - 'A'][i-1].abbreviatedCellText();
