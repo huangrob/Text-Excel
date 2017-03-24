@@ -6,7 +6,6 @@ public class TextCell implements Cell{
 	
 	public TextCell(String contents){
 		text = contents;
-		System.out.println(contents);
 	}
 	
 	public String abbreviatedCellText(){

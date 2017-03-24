@@ -21,6 +21,8 @@ public class Spreadsheet implements Grid{
 	public String processCommand(String command)
 	{
 		String[] commandParts = command.split(" ", 3);
+		System.out.println(commandParts.length);
+		System.out.println(Arrays.toString(commandParts));
 		if (commandParts.length == 3) {
 			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
 			int colNum = coordinates.getCol();
@@ -73,8 +75,7 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String getGridText()
 	{
-		String grid = "";
-		grid += "   ";
+		String grid = "   ";
 		for (char c = 'A'; c <= 'L'; c++){
 			grid += "|" + c + "         ";
 		}
