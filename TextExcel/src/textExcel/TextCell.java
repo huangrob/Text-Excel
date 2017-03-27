@@ -5,28 +5,25 @@ public class TextCell implements Cell{
 	private String text;
 	
 	public TextCell(String contents){
-		text = contents;
-		System.out.println(contents);
+		text = contents.substring(1, contents.length() - 1);
 	}
 	
 	public String abbreviatedCellText(){
+		String abbreviatedText = "";
 		if (text.length() <= 10){
-			for (int i = 10; i >= text.length(); i--){
-				text += " ";
+			for (int i = 10; i > text.length(); i--){
+				abbreviatedText += " ";
 			}
-			return text;
+			return text + abbreviatedText;
 		}
 		else {
-			String abbreviatedText = "";
-			for (int j = 0; j < 10; j++){
-				abbreviatedText += text.charAt(j);
-			}
+			abbreviatedText += text.substring(0, 10);
 			return abbreviatedText;
 		}
 	}
 	
 	public String fullCellText(){
-		return text;
+		return "\"" + text + "\"";
 	}
 	
 	public String getType(){

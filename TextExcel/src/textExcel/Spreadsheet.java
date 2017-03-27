@@ -22,7 +22,7 @@ public class Spreadsheet implements Grid{
 	{
 		String[] commandParts = command.split(" ", 3);
 		if (commandParts.length == 3) {
-			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0].toUpperCase());
 			int colNum = coordinates.getCol();
 			int rowNum = coordinates.getRow();
 			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
@@ -30,7 +30,7 @@ public class Spreadsheet implements Grid{
 		}
 		else if (commandParts.length == 1) {
 			if (command.length() <= 3) {
-				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0]);
+				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0].toUpperCase());
 				int colNum = coordinates.getCol();
 				int rowNum = coordinates.getRow();
 				return spreadsheet[colNum][rowNum].fullCellText();
@@ -41,7 +41,7 @@ public class Spreadsheet implements Grid{
 			}
 		}
 		else if (commandParts.length == 2) {
-			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1]);
+			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1].toUpperCase());
 			int colNum = coordinates.getCol();
 			int rowNum = coordinates.getRow();
 			spreadsheet[colNum][rowNum] = new EmptyCell();
