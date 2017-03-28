@@ -25,6 +25,9 @@ public class Spreadsheet implements Grid{
 			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0].toUpperCase());
 			int colNum = coordinates.getCol();
 			int rowNum = coordinates.getRow();
+			if (commandParts[2].contains("%")){
+				spreadsheet[colNum][rowNum] = new PercentCell(commandParts[2]);
+			}
 			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
 			return getGridText();
 		}
@@ -36,8 +39,12 @@ public class Spreadsheet implements Grid{
 				return spreadsheet[colNum][rowNum].fullCellText();
 			}
 			else {
-				Spreadsheet clearSpreadsheet = new Spreadsheet();
-				return clearSpreadsheet.getGridText();
+				for(int i = 0; i < spreadsheet.length; i++){
+					for (int j = 0; j < spreadsheet[i].length; j++){
+						spreadsheet[i][j] = new EmptyCell();
+					}
+				}
+				return getGridText();
 			}
 		}
 		else if (commandParts.length == 2) {
@@ -67,7 +74,7 @@ public class Spreadsheet implements Grid{
 	@Override
 	public Cell getCell(Location loc)
 	{
-		return spreadsheet[loc.getRow()][loc.getCol()];
+		return spreadsheet[loc.getCol()][loc.getRow()];
 	}
 
 	@Override

@@ -5,18 +5,15 @@ public class RealCell implements Cell{
 	private String value;
 	
 	public String abbreviatedCellText(){
+		String spaces = "";
 		if (value.length() <= 10){
 			for (int i = 10; i > value.length(); i--){
-				value += " ";
+				spaces += " ";
 			}
-			return value;
+			return value + spaces;
 		}
 		else {
-			String abbreviatedValue = "";
-			for (int j = 0; j < 10; j++){
-				abbreviatedValue += value.charAt(j);
-			}
-			return abbreviatedValue;
+			return value.substring(0, 10);
 		}
 	}
 	
