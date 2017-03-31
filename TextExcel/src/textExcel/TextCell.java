@@ -24,9 +24,5 @@ public class TextCell implements Cell{
 	public String fullCellText(){
 		return "\"" + text + "\"";
 	}
-	
-	public String getType(){
-		return "TextCell";
-	}
 
 }

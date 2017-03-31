@@ -20,17 +20,29 @@ public class Spreadsheet implements Grid{
 	@Override
 	public String processCommand(String command)
 	{
+		
 		String[] commandParts = command.split(" ", 3);
+		
 		if (commandParts.length == 3) {
 			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0].toUpperCase());
 			int colNum = coordinates.getCol();
 			int rowNum = coordinates.getRow();
+			
 			if (commandParts[2].contains("%")){
-				spreadsheet[colNum][rowNum] = new PercentCell(commandParts[2]);
+				spreadsheet[colNum][rowNum] = new PercentCell(commandParts[2].substring(0, commandParts[2].length() - 1));
+			} 
+			else if (commandParts[2].charAt(0) == '(' && commandParts[2].charAt(commandParts[2].length() - 1) == ')'){
+				spreadsheet[colNum][rowNum] = new FormulaCell(commandParts[2]);
+			} 
+			else if (commandParts[2].charAt(0) == '"' && commandParts[2].charAt(commandParts[2].length() - 1) == '"'){
+				spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
+			} 
+			else {
+				spreadsheet[colNum][rowNum] = new ValueCell(commandParts[2]);
 			}
-			spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
 			return getGridText();
 		}
+		
 		else if (commandParts.length == 1) {
 			if (command.length() <= 3) {
 				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[0].toUpperCase());
@@ -47,6 +59,7 @@ public class Spreadsheet implements Grid{
 				return getGridText();
 			}
 		}
+		
 		else if (commandParts.length == 2) {
 			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1].toUpperCase());
 			int colNum = coordinates.getCol();

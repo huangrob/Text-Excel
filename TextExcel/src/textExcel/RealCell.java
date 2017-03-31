@@ -4,13 +4,18 @@ public class RealCell implements Cell{
 	
 	private String value;
 	
+	public RealCell (String val){
+		value = val;
+	}
+	
 	public String abbreviatedCellText(){
+		String doubleVal = getDouble() + "";
 		String spaces = "";
-		if (value.length() <= 10){
-			for (int i = 10; i > value.length(); i--){
+		if (doubleVal.length() <= 10){
+			for (int i = 10; i > doubleVal.length(); i--){
 				spaces += " ";
 			}
-			return value + spaces;
+			return doubleVal + spaces;
 		}
 		else {
 			return value.substring(0, 10);
@@ -21,15 +26,8 @@ public class RealCell implements Cell{
 		return value;
 	}
 	
-	public RealCell (String val){
-		value = val;
-	}
-	
 	public double getDouble(){
 		return Double.parseDouble(value);
 	}
-	
-	public String getType(){
-		return "RealCell";
-	}
+
 }
