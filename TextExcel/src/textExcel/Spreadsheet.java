@@ -61,14 +61,16 @@ public class Spreadsheet implements Grid{
 		}
 		
 		else if (commandParts.length == 2) {
-			SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1].toUpperCase());
-			int colNum = coordinates.getCol();
-			int rowNum = coordinates.getRow();
-			spreadsheet[colNum][rowNum] = new EmptyCell();
-			return getGridText();
-		}
-		else {
-			return "";
+			if (commandParts[0].equalsIgnoreCase("clear")) {
+				SpreadsheetLocation coordinates = new SpreadsheetLocation(commandParts[1].toUpperCase());
+				int colNum = coordinates.getCol();
+				int rowNum = coordinates.getRow();
+				spreadsheet[colNum][rowNum] = new EmptyCell();
+				return getGridText();
+			}
+			else {
+				return "";
+			}
 		}
 	}
 		
