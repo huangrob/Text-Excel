@@ -9,7 +9,7 @@ public class RealCell implements Cell{
 	}
 	
 	public String abbreviatedCellText(){
-		String doubleVal = getDouble() + "";
+		String doubleVal = getDoubleValue() + "";
 		String spaces = "";
 		if (doubleVal.length() <= 10){
 			for (int i = 10; i > doubleVal.length(); i--){
@@ -26,7 +26,7 @@ public class RealCell implements Cell{
 		return value;
 	}
 	
-	public double getDouble(){
+	public double getDoubleValue(){
 		return Double.parseDouble(value);
 	}
 

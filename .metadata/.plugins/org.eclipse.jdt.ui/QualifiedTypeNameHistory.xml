@@ -3,4 +3,6 @@
 <fullyQualifiedTypeName name="textExcel.TextCell"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="textExcel.TestsALL.Helper"/>
+<fullyQualifiedTypeName name="textExcel.Grid"/>
+<fullyQualifiedTypeName name="textExcel.Spreadsheet"/>
 </qualifiedTypeNameHistroy>

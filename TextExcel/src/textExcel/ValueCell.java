@@ -2,6 +2,8 @@ package textExcel;
 
 public class ValueCell extends RealCell {
 	
+	private double doubleVal;
+	
 	public String abbreviatedCellText() {
 		return super.abbreviatedCellText();
 	}
@@ -11,7 +13,12 @@ public class ValueCell extends RealCell {
 	}
 	
 	public ValueCell (String val){
-		super(val);	
+		super(val);
+		doubleVal = Double.parseDouble(super.fullCellText());
+	}
+	
+	public double getDoubleValue(){
+		return doubleVal;
 	}
 
 }
