@@ -12,7 +12,6 @@ INDEX VERSION 1.129+C:\Users\Robert\Documents\GitHub\Text-Excel\.metadata\.plugi
 449440424.index
 25249994.index
 1841280308.index
-2426730796.index
 3314433690.index
 843494433.index
 3643810303.index
