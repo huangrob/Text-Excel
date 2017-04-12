@@ -31,7 +31,7 @@ public class Spreadsheet implements Grid{
 					spreadsheet[colNum][rowNum] = new PercentCell(commandParts[2].substring(0, commandParts[2].length() - 1));
 				} 
 				else if (commandParts[2].charAt(0) == '(' && commandParts[2].charAt(commandParts[2].length() - 1) == ')'){
-					spreadsheet[colNum][rowNum] = new FormulaCell(commandParts[2], spreadsheet);
+					spreadsheet[colNum][rowNum] = new FormulaCell(commandParts[2]);
 				} 
 				else if (commandParts[2].charAt(0) == '"' && commandParts[2].charAt(commandParts[2].length() - 1) == '"'){
 					spreadsheet[colNum][rowNum] = new TextCell(commandParts[2]);
