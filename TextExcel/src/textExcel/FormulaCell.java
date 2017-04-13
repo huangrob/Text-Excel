@@ -38,32 +38,38 @@ public class FormulaCell extends RealCell {
 				terms[i] = operands[i];
 			}
 		}
-		for (int i = 0; i < terms.length; i++){
-			if (terms[i].charAt(0) >= 65){
-				SpreadsheetLocation cell = new SpreadsheetLocation(terms[i].toUpperCase());
-				terms[i] = spreadsheet[cell.getCol()][cell.getRow()].fullCellText();
-				termsValue[i] = Double.parseDouble(terms[i]);
+		for (int i = 0; i < terms.length; i+=2){
+			if ((terms[i].charAt(0) >= 'a' && terms[i].charAt(0) <= 'z') || (terms[i].charAt(0) >= 'A' && terms[i].charAt(0) <= 'Z')){
+				SpreadsheetLocation loc = new SpreadsheetLocation(terms[i].toUpperCase());
+				String cellFormula = spreadsheet[loc.getCol()][loc.getRow()].fullCellText();
+				FormulaCell cell = new FormulaCell(cellFormula, spreadsheet);
+				termsValue[i] = cell.getDoubleValue();
 			}
 			else {
 				termsValue[i] = Double.parseDouble(terms[i]);
 			}
 		}
 		Double returnValue = termsValue[0];
-		for (int i = 0; i < termsValue.length; i+=2){
-			if (operators[i+1].equals("+")){
-				returnValue += termsValue[i];
-			}
-			else if (operators[i+1].equals("-")){
-				returnValue -= termsValue[i];
-			}	
-			else if (operators[i+1].equals("*")){
-				returnValue *= termsValue[i];
-			}	
-			else if (operators[i+1].equals("/")){
-				returnValue /= termsValue[i];
-			}	
+		if (operands.length == 1){
+			return returnValue;
 		}
-		return returnValue;
+		else {
+			for (int i = 0; i < termsValue.length - 2; i+=2){
+				if (operators[i+1].equals("+")){
+					returnValue += termsValue[i+2];
+				}
+				else if (operators[i+1].equals("-")){
+					returnValue -= termsValue[i+2];
+				}	
+				else if (operators[i+1].equals("*")){
+					returnValue *= termsValue[i+2];
+				}	
+				else if (operators[i+1].equals("/")){
+					returnValue /= termsValue[i+2];
+				}
+			}
+			return returnValue;
+		}
 	}
 	
 	public String fullCellText() {
