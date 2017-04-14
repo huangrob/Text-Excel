@@ -30,7 +30,7 @@ public class FormulaCell extends RealCell {
 		String[] operators = new String[operands.length];
 		String[] terms = new String[operands.length];
 		Double[] termsValue = new Double[operands.length];
-		if (!(operands.length == 2)) {
+		if (!operands[0].equals("AVG") && !operands[0].equals("SUM")) {
 			for (int i = 0; i < operands.length; i++){
 				if (i % 2 == 1){
 					operators[i] = operands[i];
